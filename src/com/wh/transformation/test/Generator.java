@@ -1,7 +1,7 @@
-package com.wh.transformation;
+package com.wh.transformation.test;
 
-import com.wh.transformation.schema.DDTable;
-import com.wh.transformation.schema.DimTable;
+import com.wh.transformation.test.DDTable;
+import com.wh.transformation.test.DimTable;
 import com.wh.transformation.builder.JoinBuilder;
 
 /**

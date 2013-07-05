@@ -1,6 +1,6 @@
 package com.wh.transformation.builder;
 
-import com.wh.transformation.schema.DDTable;
+import com.wh.transformation.test.DDTable;
 import com.wh.transformation.constants.WhConstants;
 
 /**
