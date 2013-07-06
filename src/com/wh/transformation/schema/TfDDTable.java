@@ -14,6 +14,7 @@ public class TfDDTable {
   private int id;
   private String tableName;
   private String schemaName;
+  private String alias;
 
   private List<TfDDTableColumn> columns = new ArrayList<TfDDTableColumn>();
   private List<TfDDTableJoin> joins = new ArrayList<TfDDTableJoin>();
@@ -57,5 +58,13 @@ public class TfDDTable {
 
   public void setJoins(List<TfDDTableJoin> joins) {
     this.joins = joins;
+  }
+
+  public String getAlias() {
+    return alias;
+  }
+
+  public void setAlias(String alias) {
+    this.alias = alias;
   }
 }

@@ -2,7 +2,6 @@ package com.wh.transformation.util;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.wh.common.util.AntServiceLocator;
-import com.wh.vertica.util.VerticaDataSourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,20 +17,20 @@ public class DbUtils {
 
   private static Logger logger = LoggerFactory.getLogger(DbUtils.class);
 
-  public static DataSource addDataSource(VerticaDataSourceType verticaDataSourceType, String dbName, String userName, String password, String serverUrl) {
+  public static DataSource addDataSource(DataSourceType dataSourceType, String dbName, String userName, String password, String serverUrl) {
     ComboPooledDataSource cpds = null;
     try {
 
       cpds = new ComboPooledDataSource();
       cpds.setDriverClass("com.mysql.jdbc.Driver"); // loads the jdbc driver
-      cpds.setJdbcUrl("jdbc:mysql://" + serverUrl + "/" + dbName);
+      cpds.setJdbcUrl("jdbc:mysql://" + serverUrl + "/" + dbName + "?useUnicode=true&characterEncoding=utf-8");
       cpds.setUser(userName);
       cpds.setPassword(password);
       cpds.setMinPoolSize(5);
       cpds.setPreferredTestQuery("SELECT 1");
       cpds.setTestConnectionOnCheckin(true);
       cpds.setTestConnectionOnCheckout(true);
-      AntServiceLocator.instance().bindDataSource(verticaDataSourceType.location(), cpds);
+      AntServiceLocator.instance().bindDataSource(dataSourceType.location(), cpds);
     } catch (Exception e) {
       logger.error("Error while adding data source", e);
 
