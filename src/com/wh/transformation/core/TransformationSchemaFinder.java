@@ -1,6 +1,7 @@
 package com.wh.transformation.core;
 
 import com.wh.common.util.RowProcessor;
+import com.wh.transformation.schema.TfDimTable;
 import com.wh.transformation.util.DbConnectionUtil;
 import com.wh.vertica.schema.VerticaDimTable;
 import com.wh.vertica.util.VerticaDataSourceType;
@@ -17,17 +18,15 @@ import java.sql.SQLException;
 public class TransformationSchemaFinder {
 
 
+  public TfDimTable getTfDimTables() {
 
-  public  getVerticaDimTable(String schemaName, String tableName) {
+    final TfDimTable tfDimTable = new TfDimTable();
 
-    final VerticaDimTable verticaDimTable = new VerticaDimTable();
-    verticaDimTable.setSchemaName(schemaName);
-    verticaDimTable.setTableName(tableName);
 
-    DbConnectionUtil.query("select column_name from v_catalog.columns where table_name = ? and table_schema = ?", new RowProcessor() {
+    DbConnectionUtil.query("select id, table_name, schema_name  from v_catalog.columns where table_name = ? and table_schema = ?", new RowProcessor() {
       @Override
       public void process(ResultSet rs) throws SQLException {
-        verticaDimTable.addTableColumn(rs.getString(1));
+
       }
     }, VerticaDataSourceType.VerticaDS, tableName, schemaName);
 

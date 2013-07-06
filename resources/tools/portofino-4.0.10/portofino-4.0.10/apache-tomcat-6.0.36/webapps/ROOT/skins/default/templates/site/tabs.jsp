@@ -1,0 +1,1 @@
+<%@include file="../site-no-sidebar/tabs.jsp"%>

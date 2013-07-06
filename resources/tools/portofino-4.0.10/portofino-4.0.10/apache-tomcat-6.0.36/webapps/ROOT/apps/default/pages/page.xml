@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<page description="portofino 4" id="root" navigationRoot="GHOST_ROOT" title="Portofino4">
+    <detailLayout>
+        <childPages/>
+        <self/>
+    </detailLayout>
+    <layout>
+        <childPages>
+            <childPage name="welcome" showInNavigation="true"/>
+            <childPage name="dd_table" showInNavigation="true"/>
+            <childPage name="dd_table_columns" showInNavigation="true"/>
+            <childPage name="dd_table_join" showInNavigation="true"/>
+            <childPage name="dim_table" showInNavigation="true"/>
+            <childPage name="dim_table_columns" showInNavigation="true"/>
+        </childPages>
+        <self/>
+    </layout>
+    <permissions>
+        <group level="VIEW" name="all"/>
+    </permissions>
+</page>
