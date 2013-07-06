@@ -2,14 +2,14 @@ package com.wh.transformation.util;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Vaibhav
+ * User: admin
  * Date: Jul 6, 2013
  * Time: 2:22:45 AM
  */
 public enum DataSourceType {
 
 
-  HKDS("HKDS");
+  TransformationDS("TransformationDS");
 
 
   private String location;

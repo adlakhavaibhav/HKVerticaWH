@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Vaibhav
+ * User: admin
  * Date: Jul 6, 2013
  * Time: 5:28:00 AM
  */
@@ -16,6 +16,7 @@ public class TfDDTable {
   private String schemaName;
 
   private List<TfDDTableColumn> columns = new ArrayList<TfDDTableColumn>();
+  private List<TfDDTableJoin> joins = new ArrayList<TfDDTableJoin>();
 
 
   public int getId() {
@@ -48,5 +49,13 @@ public class TfDDTable {
 
   public void setColumns(List<TfDDTableColumn> columns) {
     this.columns = columns;
+  }
+
+  public List<TfDDTableJoin> getJoins() {
+    return joins;
+  }
+
+  public void setJoins(List<TfDDTableJoin> joins) {
+    this.joins = joins;
   }
 }

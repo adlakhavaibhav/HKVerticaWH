@@ -5,12 +5,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Vaibhav
- * Date: Jul 5, 2013
- * Time: 10:33:20 PM
- */
+
 public class AntServiceLocator {
 
   private static AntServiceLocator _instance = new AntServiceLocator();

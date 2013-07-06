@@ -4,12 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Vaibhav
- * Date: Jul 6, 2013
- * Time: 1:02:50 AM
- */
 public class ResultWriter {
 
   private int flushInterval;
