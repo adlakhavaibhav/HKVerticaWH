@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
  * Date: Jul 5, 2013
  * Time: 10:44:27 PM
  */
-public class VerticaDimTable {
+public class VerticaTable {
 
   protected String tableName;
   protected String schemaName;
@@ -17,7 +17,28 @@ public class VerticaDimTable {
   protected Set<String> tableColumns = new LinkedHashSet<String>();
 
 
-  public VerticaDimTable addTableColumn(String colName) {
+  public boolean isFactTable() {
+    return tableName.startsWith("ft_");
+  }
+
+  public boolean isDimTable() {
+    return tableName.startsWith("dim_");
+  }
+
+  public String getPrimaryOLTPColumn() {
+    if (isDimTable()) {
+
+      for (String columnName : tableColumns) {
+        if (columnName.endsWith("_id")) {
+          return columnName;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  public VerticaTable addTableColumn(String colName) {
     this.tableColumns.add(colName);
     return this;
   }

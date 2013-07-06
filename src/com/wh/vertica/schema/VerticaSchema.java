@@ -11,17 +11,30 @@ import java.util.List;
  */
 public class VerticaSchema {
 
-  private List<VerticaDimTable> dimTables = new ArrayList<VerticaDimTable>();
+  private List<VerticaTable> allTables = new ArrayList<VerticaTable>();
 
   private String schemaName;
 
 
-  public List<VerticaDimTable> getDimTables() {
+  public List<VerticaTable> getDimTables() {
+    List<VerticaTable> dimTables = new ArrayList<VerticaTable>();
+
+    for (VerticaTable verticaTable : allTables) {
+      if (verticaTable.isDimTable()) {
+        dimTables.add(verticaTable);
+      }
+    }
+
     return dimTables;
   }
 
-  public void setDimTables(List<VerticaDimTable> dimTables) {
-    this.dimTables = dimTables;
+
+  public List<VerticaTable> getAllTables() {
+    return allTables;
+  }
+
+  public void setAllTables(List<VerticaTable> allTables) {
+    this.allTables = allTables;
   }
 
   public String getSchemaName() {

@@ -10,7 +10,7 @@
         <property enabled="false" inSummary="false" insertable="false" name="dd_table_id" searchable="false" updatable="false">
             <annotations/>
         </property>
-        <property enabled="true" inSummary="true" insertable="true" name="_order" searchable="true" updatable="true">
+        <property enabled="true" inSummary="true" insertable="true" name="usage_order" searchable="true" updatable="true">
             <annotations/>
         </property>
     </properties>

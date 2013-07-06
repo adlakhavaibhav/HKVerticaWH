@@ -61,7 +61,7 @@
 <column autoincrement="false" columnName="dd_table_id" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
     <annotations/>
 </column>
-<column autoincrement="false" columnName="order" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
+<column autoincrement="false" columnName="usage_order" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
     <annotations/>
 </column>
                             </columns>
@@ -93,7 +93,7 @@
 <column autoincrement="false" columnName="dim_table_id" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
     <annotations/>
 </column>
-<column autoincrement="false" columnName="order" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
+<column autoincrement="false" columnName="usage_order" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
     <annotations/>
 </column>
                             </columns>
@@ -159,7 +159,7 @@
         </annotation>
     </annotations>
 </column>
-<column autoincrement="false" columnName="join_table_name" columnType="VARCHAR" jdbcType="12" length="500" nullable="false" scale="0">
+<column autoincrement="false" columnName="join_table_qualified_name" columnType="VARCHAR" jdbcType="12" length="500" nullable="false" scale="0">
     <annotations>
         <annotation type="com.manydesigns.elements.annotations.Multiline">
             <value>true</value>
@@ -169,11 +169,18 @@
 <column autoincrement="false" columnName="join_table_alias" columnType="VARCHAR" jdbcType="12" length="45" nullable="false" scale="0">
     <annotations/>
 </column>
-<column autoincrement="false" columnName="order" columnType="VARCHAR" jdbcType="12" length="45" nullable="false" scale="0">
+<column autoincrement="false" columnName="usage_order" columnType="VARCHAR" jdbcType="12" length="45" nullable="false" scale="0">
     <annotations/>
 </column>
 <column autoincrement="false" columnName="dd_table_id" columnType="INT" jdbcType="4" length="10" nullable="false" scale="0">
     <annotations/>
+</column>
+<column autoincrement="false" columnName="join_type" columnType="VARCHAR" jdbcType="12" length="500" nullable="true" scale="0">
+    <annotations>
+        <annotation type="com.manydesigns.elements.annotations.Multiline">
+            <value>true</value>
+        </annotation>
+    </annotations>
 </column>
                             </columns>
                             <foreignKeys>

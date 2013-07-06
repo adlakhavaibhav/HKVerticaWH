@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<page description="dd table" id="zmwk57y2o23nspwhaqo5olisq" title="dd table">
+<page description="dd table" id="cnvt07kzjr80nqf8qhewysbky" navigationRoot="INHERIT" title="dd table">
     <detailLayout>
         <childPages>
-            <childPage name="dd_table_columns" showInNavigation="true"/>
-            <childPage name="dd_table_join" showInNavigation="true"/>
+            <childPage container="default" name="dd_table_columns" order="0" showInNavigation="true"/>
+            <childPage container="default" name="dd_table_join" order="0" showInNavigation="true"/>
         </childPages>
+        <self/>
     </detailLayout>
     <layout>
         <childPages/>
+        <self/>
     </layout>
     <permissions/>
 </page>

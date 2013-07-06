@@ -10,16 +10,19 @@
         <property enabled="true" inSummary="true" insertable="true" name="rhscol" searchable="true" updatable="true">
             <annotations/>
         </property>
-        <property enabled="true" inSummary="true" insertable="true" name="join_table_name" searchable="true" updatable="true">
+        <property enabled="true" inSummary="true" insertable="true" name="join_table_qualified_name" searchable="true" updatable="true">
             <annotations/>
         </property>
         <property enabled="true" inSummary="true" insertable="true" name="join_table_alias" searchable="true" updatable="true">
             <annotations/>
         </property>
-        <property enabled="true" inSummary="false" insertable="true" name="_order" searchable="false" updatable="true">
+        <property enabled="true" inSummary="false" insertable="true" name="usage_order" searchable="false" updatable="true">
             <annotations/>
         </property>
         <property enabled="false" inSummary="false" insertable="false" name="dd_table_id" searchable="false" updatable="false">
+            <annotations/>
+        </property>
+        <property enabled="true" inSummary="false" insertable="true" name="join_type" searchable="false" updatable="true">
             <annotations/>
         </property>
     </properties>
