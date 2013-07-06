@@ -3,7 +3,8 @@ package com.wh.vertica;
 import com.wh.common.io.ResultWriter;
 import com.wh.vertica.core.VerticaSchemaFinder;
 import com.wh.vertica.core.VerticaScriptBuilder;
-import com.wh.vertica.schema.VerticaTable;
+import com.wh.vertica.schema.VerticaBaseTable;
+import com.wh.vertica.schema.VerticaDimTable;
 import com.wh.vertica.schema.VerticaSchema;
 import com.wh.vertica.util.VerticaDataSourceType;
 import com.wh.vertica.util.VerticaDbUtils;
@@ -36,22 +37,25 @@ public class VerticaDbTest {
     String dbName = "warehouse";
     VerticaDbUtils.addDataSource(VerticaDataSourceType.VerticaDS, dbName, userName, password.equals("dev") ? "" : password, dbServerIp);
 
-    /*VerticaTable verticaDimTable = verticaSchemaFinder.getVerticaDimTable(stagSchemaName, "dim_pincode");*/
-    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName);
-
-
     VerticaSchemaFinder verticaSchemaFinder = new VerticaSchemaFinder();
     VerticaSchema verticaSchema = verticaSchemaFinder.getVerticaSchema(prodSchemaName);
+
+
+    /*VerticaBaseTable verticaDimTable = verticaSchemaFinder.getVerticaDimTable(stagSchemaName, "dim_pincode");*/
+    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName, verticaSchema);      // only for testing
+
 
     VerticaDbTest dbTest = new VerticaDbTest();
 
 
     dbTest.generateProjectionsForSchema(verticaSchema);
     dbTest.generateEndDtAndActiveUpdateSql(verticaSchema);
+    dbTest.generateInsertSqlForDimTables(verticaSchema);
 
 
-    /* String updateEndDtAndActiveSql = scriptBuilder.getUpdateEndDtAndActiveSqlForProd("dim_address", "dim_address", "address_id");*/
+    /*String updateEndDtAndActiveSql = scriptBuilder.getInsertSqlForProd("dim_address", "dim_address");
 
+    System.out.println(updateEndDtAndActiveSql);*/
 
     getWriter().close();
 
@@ -60,12 +64,25 @@ public class VerticaDbTest {
 
   }
 
+  public void generateInsertSqlForDimTables(VerticaSchema verticaSchema) {
+    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName, verticaSchema);
+
+    for (VerticaDimTable verticaDimTable : verticaSchema.getDimTables()) {
+      String insertDimSql = scriptBuilder.getInsertSqlForProd(verticaDimTable.getTableName(), verticaDimTable.getTableName());
+
+
+      getWriter().append(insertDimSql).append("\n");
+    }
+
+
+  }
+
 
   public void generateEndDtAndActiveUpdateSql(VerticaSchema verticaSchema) {
-    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName);
+    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName, verticaSchema);
 
-    for (VerticaTable verticaTable : verticaSchema.getDimTables()) {
-      String updateEndDtAndActiveSql = scriptBuilder.getUpdateEndDtAndActiveSqlForProd(verticaTable.getTableName(), verticaTable.getTableName(), verticaTable.getPrimaryOLTPColumn());
+    for (VerticaDimTable verticaDimTable : verticaSchema.getDimTables()) {
+      String updateEndDtAndActiveSql = scriptBuilder.getUpdateEndDtAndActiveSqlForProd(verticaDimTable.getTableName(), verticaDimTable.getTableName(), verticaDimTable.getPrimaryOLTPColumn());
 
 
       getWriter().append(updateEndDtAndActiveSql).append("\n");
@@ -76,10 +93,10 @@ public class VerticaDbTest {
 
 
   public void generateProjectionsForSchema(VerticaSchema verticaSchema) {
-    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName);
+    VerticaScriptBuilder scriptBuilder = new VerticaScriptBuilder(prodSchemaName, stagSchemaName, verticaSchema);
 
-    for (VerticaTable verticaTable : verticaSchema.getAllTables()) {
-      String projectionSql = scriptBuilder.generateProjection(verticaTable.getSchemaName(), verticaTable.getTableName());
+    for (VerticaBaseTable verticaBaseTable : verticaSchema.getAllTables()) {
+      String projectionSql = scriptBuilder.generateProjection(verticaBaseTable.getSchemaName(), verticaBaseTable.getTableName());
 
 
       getWriter().append(projectionSql).append("\n");

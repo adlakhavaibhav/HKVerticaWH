@@ -4,13 +4,13 @@ import com.wh.common.util.RowProcessor;
 import com.wh.vertica.constants.VerticaConstants;
 import com.wh.vertica.util.VerticaDataSourceType;
 import com.wh.vertica.util.VerticaDbConnectionUtil;
+import com.wh.vertica.schema.VerticaSchema;
+import com.wh.vertica.schema.VerticaDimTable;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,7 +22,7 @@ public class VerticaScriptBuilder {
 
   public static final String SELECT = " SELECT ";
   public static final String UPDATE = " UPDATE ";
-  public static final String INSERT = " INSERT ";
+  public static final String INSERT = " INSERT INTO ";
   public static final String CREATE = " CREATE ";
   public static final String PROJECTION = " PROJECTION ";
   public static final String STAR = " * ";
@@ -42,6 +42,8 @@ public class VerticaScriptBuilder {
   public static final String EQUALS = " = ";
   public static final String COMMA = " , ";
   public static final String SEMI_COLON = " ; ";
+  public static final String OPN_RND_BRACKET = " ( ";
+  public static final String CLOSE_RND_BRACKET = " ) ";
 
 
   /**
@@ -49,25 +51,31 @@ public class VerticaScriptBuilder {
    */
   public static final String CURR_DATE = " CURRENT_DATE() ";
 
-
-  public static Set<String> dimColsIgnoredWhileInsert = new HashSet<String>();
-
-
-  static {
-    dimColsIgnoredWhileInsert.add("start_date");
-    dimColsIgnoredWhileInsert.add("end_date");
-    dimColsIgnoredWhileInsert.add("is_current");
-
-  }
-
   private String prodSchemaName;
-
   private String stagSchemaName;
+  private VerticaSchema verticaSchema;
 
 
-  public VerticaScriptBuilder(String prodSchemaName, String stagSchemaName) {
+  public VerticaScriptBuilder(String prodSchemaName, String stagSchemaName, VerticaSchema verticaSchema) {
     this.prodSchemaName = prodSchemaName;
     this.stagSchemaName = stagSchemaName;
+    this.verticaSchema = verticaSchema;
+  }
+
+  public String getInsertSqlForProd(String stagDimTableName, String prodDimTableName) {
+    VerticaDimTable stageDimTable = verticaSchema.getDimTableByName(stagDimTableName);
+    VerticaDimTable prodDimTable = verticaSchema.getDimTableByName(prodDimTableName);
+
+    String prodDimTableQualifiedName = getQualifiedName(prodSchemaName, prodDimTableName);
+    String stagDimTableQualifiedName = getQualifiedName(stagSchemaName, stagDimTableName);
+
+
+    StringBuilder insertSQlForProd = new StringBuilder(INSERT).append(prodDimTableQualifiedName)
+        .append(OPN_RND_BRACKET).append(prodDimTable.getColumnsToInsertAsString()).append(CLOSE_RND_BRACKET)
+        .append(SELECT).append(stageDimTable.getColumnsToInsertAsString()).append(FROM).append(stagDimTableQualifiedName).append(SEMI_COLON);
+
+
+    return insertSQlForProd.toString();
   }
 
   public String getUpdateEndDtAndActiveSqlForProd(String stagDimTableName, String prodDimTableName, String idColumn) {

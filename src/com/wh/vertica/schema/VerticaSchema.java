@@ -11,30 +11,35 @@ import java.util.List;
  */
 public class VerticaSchema {
 
-  private List<VerticaTable> allTables = new ArrayList<VerticaTable>();
+  private List<VerticaDimTable> dimTables = new ArrayList<VerticaDimTable>();
+  private List<VerticaFactTable> factTables = new ArrayList<VerticaFactTable>();
 
   private String schemaName;
 
 
-  public List<VerticaTable> getDimTables() {
-    List<VerticaTable> dimTables = new ArrayList<VerticaTable>();
+  public VerticaDimTable getDimTableByName(String dimTableName) {
 
-    for (VerticaTable verticaTable : allTables) {
-      if (verticaTable.isDimTable()) {
-        dimTables.add(verticaTable);
+    for (VerticaDimTable verticaDimTable : dimTables) {
+      if (verticaDimTable.getTableName().equals(dimTableName)) {
+        return verticaDimTable;
       }
     }
 
-    return dimTables;
+    return null;
   }
 
+  public List<VerticaBaseTable> getAllTables() {
+    List<VerticaBaseTable> allTables = new ArrayList<VerticaBaseTable>();
 
-  public List<VerticaTable> getAllTables() {
+    for (VerticaDimTable verticaDimTable : dimTables) {
+      allTables.add(verticaDimTable);
+    }
+
+    for (VerticaFactTable verticaFactTable : factTables) {
+      allTables.add(verticaFactTable);
+    }
+
     return allTables;
-  }
-
-  public void setAllTables(List<VerticaTable> allTables) {
-    this.allTables = allTables;
   }
 
   public String getSchemaName() {
@@ -43,5 +48,21 @@ public class VerticaSchema {
 
   public void setSchemaName(String schemaName) {
     this.schemaName = schemaName;
+  }
+
+  public List<VerticaDimTable> getDimTables() {
+    return dimTables;
+  }
+
+  public void setDimTables(List<VerticaDimTable> dimTables) {
+    this.dimTables = dimTables;
+  }
+
+  public List<VerticaFactTable> getFactTables() {
+    return factTables;
+  }
+
+  public void setFactTables(List<VerticaFactTable> factTables) {
+    this.factTables = factTables;
   }
 }
