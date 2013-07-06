@@ -8,14 +8,14 @@ import com.wh.transformation.constants.WhConstants;
  * Date: Jul 5, 2013
  * Time: 6:32:03 PM
  */
-public class DimTable extends AbstractTable {
+public class TestDimTable extends AbstractTable {
 
 
-  public DimTable(String dimTableName) {
+  public TestDimTable(String dimTableName) {
     this(dimTableName, WhConstants.DIM_SCHEMA);
   }
 
-  public DimTable(String dimTableName, String schemaName) {
+  public TestDimTable(String dimTableName, String schemaName) {
     super(dimTableName, schemaName);
   }
 

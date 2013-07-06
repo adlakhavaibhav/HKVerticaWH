@@ -1,12 +1,11 @@
 package com.wh.transformation.test;
 
+import com.wh.transformation.builder.JoinBuilder;
+import com.wh.transformation.constants.WhConstants;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.wh.transformation.builder.JoinBuilder;
-import com.wh.transformation.constants.WhConstants;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,24 +13,24 @@ import com.wh.transformation.constants.WhConstants;
  * Date: Jul 5, 2013
  * Time: 6:43:23 PM
  */
-public class DDTable extends AbstractTable {
+public class TestDDTable extends AbstractTable {
 
   private static final String DEFAULT_WHERE = "update_dt between  $oldate and $newdate ";
 
   private List<JoinBuilder> joinBuilders = new ArrayList<JoinBuilder>();
 
 
-  public DDTable addJoinBuilder(JoinBuilder joinBuilder) {
+  public TestDDTable addJoinBuilder(JoinBuilder joinBuilder) {
     this.joinBuilders.add(joinBuilder);
     return this;
   }
 
-  public DDTable(String tableName, String schemaName) {
+  public TestDDTable(String tableName, String schemaName) {
     super(tableName, schemaName);
 
   }
 
-  public DDTable(String tableName) {
+  public TestDDTable(String tableName) {
     this(tableName, WhConstants.DD_SCHEMA);
   }
 
@@ -40,7 +39,7 @@ public class DDTable extends AbstractTable {
     return primaryKeyCol;
   }*/
 
-  /*public DDTable primaryKeyCol(String primaryKeyCol) {
+  /*public TestDDTable primaryKeyCol(String primaryKeyCol) {
     this.primaryKeyCol = primaryKeyCol;
     return this;
   }*/

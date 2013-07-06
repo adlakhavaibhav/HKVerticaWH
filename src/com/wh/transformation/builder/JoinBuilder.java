@@ -1,6 +1,6 @@
 package com.wh.transformation.builder;
 
-import com.wh.transformation.test.DDTable;
+import com.wh.transformation.test.TestDDTable;
 import com.wh.transformation.constants.WhConstants;
 
 /**
@@ -13,7 +13,7 @@ public class JoinBuilder {
 
   private String joinType = WhConstants.INNER_JOIN;
 
-  private DDTable joinDDTable;
+  private TestDDTable joinDDTable;
 
 
   private String lhsCol;
@@ -25,7 +25,7 @@ public class JoinBuilder {
     return this;
   }
 
-  public JoinBuilder setJoinDDTable(DDTable joinDDTable) {
+  public JoinBuilder setJoinDDTable(TestDDTable joinDDTable) {
     this.joinDDTable = joinDDTable;
     return this;
   }
@@ -40,7 +40,7 @@ public class JoinBuilder {
     return joinType;
   }
 
-  public DDTable getJoinDDTable() {
+  public TestDDTable getJoinDDTable() {
     return joinDDTable;
   }
 

@@ -2,43 +2,67 @@ package com.wh.transformation.schema;
 
 import com.wh.transformation.constants.WhConstants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
- * User: Vaibhav
- * Date: Jul 5, 2013
- * Time: 6:32:03 PM
+ * User: admin
+ * Date: Jul 6, 2013
+ * Time: 5:10:38 AM
  */
-public class DimTable extends AbstractTable {
+public class DimTable {
+
+  private int id;
+  private String tableName;
+  private String schemaName;
+
+  private List<DimTableColumn> columns = new ArrayList<DimTableColumn>();
+
+  private DDTable ddTable;
 
 
-  public DimTable(String dimTableName) {
-    this(dimTableName, WhConstants.DIM_SCHEMA);
+  public String getQualifiedName() {
+    return this.schemaName.concat(WhConstants.REF_OP).concat(this.tableName).concat(" ");
   }
 
-  public DimTable(String dimTableName, String schemaName) {
-    super(dimTableName, schemaName);
+  public int getId() {
+    return id;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
 
-  public StringBuilder getBaseInsert() {
-    StringBuilder baseInsertBuilder = new StringBuilder();
+  public String getTableName() {
+    return tableName;
+  }
 
-    baseInsertBuilder.append(WhConstants.INSERT_OP).append(this.getQualifiedName());
+  public void setTableName(String tableName) {
+    this.tableName = tableName;
+  }
 
-    baseInsertBuilder.append(WhConstants.OPEN_RND_BRACE);
+  public String getSchemaName() {
+    return schemaName;
+  }
 
-    int i = 0;
-    for (String colName : tableColumns) {
-      baseInsertBuilder.append(colName);
-      if (i != tableColumns.size() - 1) {
-        baseInsertBuilder.append(WhConstants.COMMA);
-      }
-      i++;
-    }
+  public void setSchemaName(String schemaName) {
+    this.schemaName = schemaName;
+  }
 
-    baseInsertBuilder.append(WhConstants.CLOSE_RND_BRACE);
+  public List<DimTableColumn> getColumns() {
+    return columns;
+  }
 
+  public void setColumns(List<DimTableColumn> columns) {
+    this.columns = columns;
+  }
 
-    return baseInsertBuilder;
+  public DDTable getDdTable() {
+    return ddTable;
+  }
+
+  public void setDdTable(DDTable ddTable) {
+    this.ddTable = ddTable;
   }
 }

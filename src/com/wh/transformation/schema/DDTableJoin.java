@@ -6,15 +6,17 @@ package com.wh.transformation.schema;
  * Date: Jul 6, 2013
  * Time: 5:33:10 AM
  */
-public class TfDDTableJoin {
+public class DDTableJoin {
 
   private int id;
 
   private String lhsCol;
   private String rhsCol;
 
-  private String joinTableName;
+  private String joinTableQualifiedName;
   private String joinTableAlias;
+  private String joinType;
+
   private int order;
   private int ddTableId;
 
@@ -43,12 +45,12 @@ public class TfDDTableJoin {
     this.rhsCol = rhsCol;
   }
 
-  public String getJoinTableName() {
-    return joinTableName;
+  public String getJoinTableQualifiedName() {
+    return joinTableQualifiedName;
   }
 
-  public void setJoinTableName(String joinTableName) {
-    this.joinTableName = joinTableName;
+  public void setJoinTableQualifiedName(String joinTableQualifiedName) {
+    this.joinTableQualifiedName = joinTableQualifiedName;
   }
 
   public String getJoinTableAlias() {
@@ -73,5 +75,13 @@ public class TfDDTableJoin {
 
   public void setDdTableId(int ddTableId) {
     this.ddTableId = ddTableId;
+  }
+
+  public String getJoinType() {
+    return joinType;
+  }
+
+  public void setJoinType(String joinType) {
+    this.joinType = joinType;
   }
 }

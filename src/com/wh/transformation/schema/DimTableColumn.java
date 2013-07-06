@@ -6,7 +6,7 @@ package com.wh.transformation.schema;
  * Date: Jul 6, 2013
  * Time: 5:13:11 AM
  */
-public class TfDimTableColumn {
+public class DimTableColumn {
 
   private int id;
   private String columnName;
