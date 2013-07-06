@@ -1,14 +1,16 @@
 package com.wh.vertica.core;
 
-import com.wh.vertica.util.VerticaDbConnectionUtil;
-import com.wh.vertica.util.VerticaDataSourceType;
-import com.wh.vertica.constants.VerticaConstants;
 import com.wh.common.util.RowProcessor;
+import com.wh.vertica.constants.VerticaConstants;
+import com.wh.vertica.util.VerticaDataSourceType;
+import com.wh.vertica.util.VerticaDbConnectionUtil;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,6 +48,17 @@ public class VerticaScriptBuilder {
    * FUNCTIONS
    */
   public static final String CURR_DATE = " CURRENT_DATE() ";
+
+
+  public static Set<String> dimColsIgnoredWhileInsert = new HashSet<String>();
+
+
+  static {
+    dimColsIgnoredWhileInsert.add("start_date");
+    dimColsIgnoredWhileInsert.add("end_date");
+    dimColsIgnoredWhileInsert.add("is_current");
+
+  }
 
   private String prodSchemaName;
 
